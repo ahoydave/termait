@@ -1,2 +1,4 @@
 anthropic
 rich
+openai
+prompt_toolkit
