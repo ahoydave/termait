@@ -1,0 +1,12 @@
+{
+    "provider": "anthropic",
+    "anthropic": {
+        "api_key": "your-anthropic-api-key",
+        "model": "claude-3-5-sonnet-20241022"
+    },
+    "openai": {
+        "api_base": "http://localhost:11434/v1",
+        "model": "llama3",
+        "api_key": "ollama"
+    }
+}
