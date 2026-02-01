@@ -1,6 +1,6 @@
 # Termait
 
-Wait, what was that command again? **TermAIt** is an AI-powered terminal command generator that translates natural language into executable shell commands.
+Wait, what was that command again? **Termait** is an AI-powered terminal command generator that translates natural language into executable shell commands.
 
 It supports **Anthropic (Claude)**, **OpenAI (GPT)**, and **Local Models** (via Ollama, vLLM, etc.).
 
@@ -16,7 +16,7 @@ uv tool install .
 
 ## Configuration
 
-TermAIt is designed to check for configuration in the following order of precedence:
+Termait is designed to check for configuration in the following order of precedence:
 1.  **CLI Arguments** (highest priority)
 2.  **Environment Variables**
 3.  **Configuration File** (`~/.termait` or `~/.config/termait/config.json`)
