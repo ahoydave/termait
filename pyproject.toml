@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "AI-powered terminal command generator"
 readme = "README.md"
 requires-python = ">=3.9"
+license = "MIT"
 dependencies = [
     "anthropic>=0.42.0",
     "rich>=13.9.4",
