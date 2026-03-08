@@ -75,14 +75,21 @@ class AnthropicProvider(LLMProvider):
         )
         return response.content[0].text
 
+COMMAND_JSON_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "command": {"type": "string"},
+        "explanation": {"type": "string"}
+    },
+    "required": ["command", "explanation"]
+}
+
 class OpenAIProvider(LLMProvider):
     def __init__(self, api_key: str, base_url: Optional[str] = None, model: str = "gpt-4o"):
         self.model = model
-        # Default to a dummy key if using a local provider that doesn't need one, 
-        # but OpenAI client requires something.
         if not api_key and base_url:
             api_key = "dummy-key"
-        
+
         self.client = OpenAI(api_key=api_key, base_url=base_url)
 
     @property
@@ -92,12 +99,20 @@ class OpenAIProvider(LLMProvider):
     def generate_command(self, prompt: str) -> str:
         messages = [
             {"role": "system", "content": get_system_prompt()},
-            {"role": "user", "content": f"Generate a terminal command for: {prompt}. \n\nIMPORTANT: Return a JSON object with 'command' and 'explanation' keys. JSON ONLY."}
+            {"role": "user", "content": f"Generate a terminal command for: {prompt}"}
         ]
         response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
-            max_tokens=1024
+            max_tokens=1024,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "command_response",
+                    "schema": COMMAND_JSON_SCHEMA,
+                    "strict": True
+                }
+            }
         )
         return response.choices[0].message.content
 
